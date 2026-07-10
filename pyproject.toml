@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pauliarray",
     "paulie",
+    "stim>=1.16.0",
 ]
 
 [tool.uv.sources]
 paulie = { git = "https://github.com/QPauLie/PauLie.git" }
+pauliarray = { git = "https://github.com/algolab-quantique/pauliarray.git" }
