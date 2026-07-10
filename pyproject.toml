@@ -1,0 +1,12 @@
+[project]
+name = "paulistring-comparison"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "paulie",
+]
+
+[tool.uv.sources]
+paulie = { git = "https://github.com/QPauLie/PauLie.git" }
