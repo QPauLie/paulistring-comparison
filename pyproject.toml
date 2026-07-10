@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "juliacall>=0.9.35",
     "pauliarray",
     "paulie",
     "stim>=1.16.0",
