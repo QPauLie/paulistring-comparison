@@ -1,5 +1,13 @@
 # paulistring-comparison
 Performance comparison of Pauli string manipulation libraries
+
+The following libraries are included in the comparison:
+
+Stim: https://github.com/quantumlib/Stim
+Paulie: https://github.com/QPauLie/PauLie
+PauliArray: https://github.com/algolab-quantique/pauliarray
+PauliString.jl: https://github.com/nicolasloizeau/PauliStrings.jl
+
 ### Installation
 ```
 git clone https://github.com/QPauLie/paulistring-comparison.git
