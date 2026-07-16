@@ -22,3 +22,20 @@ uv run python main
 ### PauliString Julia
 To run tests for the PauliString.jl package, Julia must be installed on your computer. Additionally, Python must be installed from the official Python website; if installed via the Microsoft Windows Store, it will not work with the Julia package, as the Windows Store version of Python is subject to specific security restrictions that prevent it from invoking Julia.
 
+### Results
+
+Performance for 1000 qubits (lenght of list is 1000)<br>
+library: stim | build:  0.0149 sec | commutes_with:  0.3723 sec | multiply:  0.8251 sec<br>
+library: paulie | build:  0.4304 sec | commutes_with:  0.3945 sec | multiply:  0.5620 sec<br>
+library: pauliarray | build:  0.2201 sec | commutes_with:  9.2504 sec | multiply:  5.8017 sec<br>
+library: julia paulistring | build:  4.2598 sec | commutes_with:  4.9675 sec | multiply:  8.8966 sec<br>
+
+build: Time to create an array of length 1000 with n_qubits = 1000<br>
+commutes_with: Pairwise commutativity check<br>
+multiply: Pairwise multiplication<br>
+
+
+
+
+
+
