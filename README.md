@@ -28,7 +28,7 @@ build: Time to create an array of length 1000 with n_qubits = 1000<br>
 commutes_with: Pairwise commutativity check<br>
 multiply: Pairwise multiplication<br>
 
-####Computer: Intel Core i5-8265U 1.60 GHz/8Gb
+#### Computer: Intel Core i5-8265U 1.60 GHz/8Gb
 
 Performance for 1000 qubits (lenght of list is 1000)<br>
 library: stim | build:  0.0149 sec | commutes_with:  0.3723 sec | multiply:  0.8251 sec<br>
@@ -36,7 +36,7 @@ library: paulie | build:  0.4304 sec | commutes_with:  0.3945 sec | multiply:  0
 library: pauliarray | build:  0.2201 sec | commutes_with:  9.2504 sec | multiply:  5.8017 sec<br>
 library: julia paulistring | build:  4.2598 sec | commutes_with:  4.9675 sec | multiply:  8.8966 sec<br>
 
-####Computer: Intel Core i9-14900KF 6.0GHz (24 cores)/64GB<br>
+#### Computer: Intel Core i9-14900KF 6.0GHz (24 cores)/64GB<br>
 
 Performance for 1000 qubits (lenght of list is 1000)<br>
 library: stim | build:  0.0100 sec | commutes_with:  0.1180 sec | multiply:  0.2801 sec<br>
