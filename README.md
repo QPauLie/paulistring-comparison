@@ -16,7 +16,7 @@ uv sync
 ```
 ### Running
 ```
-uv run python main
+uv run python main.py
 ```
 
 ### PauliString Julia
