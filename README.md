@@ -48,12 +48,12 @@ library: paulie | build:  0.4304 sec | commutes_with:  0.3945 sec | multiply:  0
 library: pauliarray | build:  0.2201 sec | commutes_with:  9.2504 sec | multiply:  5.8017 sec<br>
 library: julia paulistring | build:  4.2598 sec | commutes_with:  4.9675 sec | multiply:  8.8966 sec<br>
 
-Performance for 10 qubits (lenght of list is 1000)
-library: stim | build:  0.0038 sec | commutes_with:  0.2350 sec | multiply:  0.5794 sec
-library: paulie | build:  0.0077 sec | commutes_with:  0.2978 sec | multiply:  0.4490 sec
-library: pauliarray | build:  0.0419 sec | commutes_with:  5.8926 sec | multiply:  3.9369 sec
-library: julia paulistring | build:  2.2405 sec | commutes_with:  5.3270 sec | multiply:  6.9090 sec
-library: python julia paulistring | build:  0.0005 sec | commutes_with:  8.6245 sec | multiply:  9.4381 sec
+Performance for 10 qubits (lenght of list is 1000)<br>
+library: stim | build:  0.0038 sec | commutes_with:  0.2350 sec | multiply:  0.5794 sec<br>
+library: paulie | build:  0.0077 sec | commutes_with:  0.2978 sec | multiply:  0.4490 sec<br>
+library: pauliarray | build:  0.0419 sec | commutes_with:  5.8926 sec | multiply:  3.9369 sec<br>
+library: julia paulistring | build:  2.2405 sec | commutes_with:  5.3270 sec | multiply:  6.9090 sec<br>
+library: python julia paulistring | build:  0.0005 sec | commutes_with:  8.6245 sec | multiply:  9.4381 sec<br>
 
 #### Computer: Intel Core i9-14900KF 6.0GHz (24 cores)/64GB<br>
 
