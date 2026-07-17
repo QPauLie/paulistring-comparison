@@ -8,6 +8,8 @@ dependencies = [
     "juliacall>=0.9.35",
     "pauliarray",
     "paulie",
+    "paulistrings>=0.1.1",
+    "pycocotools==2.0.8",
     "stim>=1.16.0",
 ]
 

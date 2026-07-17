@@ -22,6 +22,21 @@ def is_julia_installed()->bool:
     except (subprocess.CalledProcessError, FileNotFoundError):
         return False
 
+def is_python_julia_installed()->bool:
+    """ 
+    Checking if Python Paulistrings Julia is installed
+    Returns:
+         bool
+         True if Python Paulistrings Julia is installed
+
+    """
+    try:
+        import paulistrings as ps
+        H = ps.Operator(1)
+        return True
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return False
+
 
 def get_random(n_qubits: int) -> str:
     """ 
@@ -68,6 +83,29 @@ def append_paulistring_jl(paulistring_libs: list[dict])->list[dict]:
         'build': get_paulistring_jl_list,
         'commutes_with': check_paulistring_jl_commutes_with,
         'multiply': check_paulistring_jl_multiply,
+    })
+    return paulistring_libs
+
+def append_python_paulistring_jl(paulistring_libs: list[dict])->list[dict]:
+    """
+    Adding the Python PauliString library in Julia, if it is installed.
+    Args:
+        paulistring_libs (list[dict]): List for calling library functions
+    Returns:
+        list[dict]
+        List for calling library functions
+    """
+    if not is_python_julia_installed():
+        return paulistring_libs
+
+    from src.paulistrings import (get_python_paulistring_jl_list,
+        check_python_paulistring_jl_commutes_with,
+        check_python_paulistring_jl_multiply)
+    paulistring_libs.append({
+        'name': 'python julia paulistring',
+        'build': get_python_paulistring_jl_list,
+        'commutes_with': check_python_paulistring_jl_commutes_with,
+        'multiply': check_python_paulistring_jl_multiply,
     })
     return paulistring_libs
 
@@ -130,7 +168,8 @@ def main():
         },
     ]
     paulistring_libs = append_paulistring_jl(paulistring_libs)
-    n_qubits = 1000
+    paulistring_libs = append_python_paulistring_jl(paulistring_libs)
+    n_qubits = 10
     length = 1000
     paulistrings = get_random_list(n_qubits, length)
     for lib in paulistring_libs:
