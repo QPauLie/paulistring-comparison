@@ -168,8 +168,8 @@ def main():
         },
     ]
     paulistring_libs = append_paulistring_jl(paulistring_libs)
-    #paulistring_libs = append_python_paulistring_jl(paulistring_libs)
-    n_qubits = 1000
+    paulistring_libs = append_python_paulistring_jl(paulistring_libs)
+    n_qubits = 10
     length = 1000
     paulistrings = get_random_list(n_qubits, length)
     for lib in paulistring_libs:
