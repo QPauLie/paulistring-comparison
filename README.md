@@ -63,4 +63,9 @@ library: paulie | build:  0.1464 sec | commutes_with:  0.1769 sec | multiply:  0
 library: pauliarray | build:  0.0948 sec | commutes_with:  3.3331 sec | multiply:  1.9737 sec<br>
 library: julia paulistring | build:  2.5861 sec | commutes_with:  2.3711 sec | multiply:  4.0043 sec<br>
 
-
+Performance for 10 qubits (lenght of list is 1000)<br>
+library: stim | build:  0.0008 sec | commutes_with:  0.1650 sec | multiply:  0.5046 secc<br>
+library: paulie | build:  0.0020 sec | commutes_with:  0.1189 sec | multiply:  0.2117 secc<br>
+library: pauliarray | build:  0.0085 sec | commutes_with:  5.4062 sec | multiply:  4.3027 secc<br>
+library: julia paulistring | build:  1.9386 sec | commutes_with:  4.4792 sec | multiply:  3.6173 secc<br>
+library: python julia paulistring | build:  0.0000 sec | commutes_with:  9.6688 sec | multiply:  10.6119 secc<br>
