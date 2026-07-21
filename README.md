@@ -60,7 +60,8 @@ Performance for 10 qubits (lenght of list is 1000)<br>
 |julia paulistring        |2.2405    |5.3270            |6.9090       |
 |python julia paulistring |0.0005    |8.6245            |9.4381       |
 <br>
-#### Computer: Intel Core i9-14900KF 6.0GHz (24 cores)/64GB<br>
+
+#### Computer: Intel Core i9-14900KF 6.0GHz (24 cores)/64GB
 
 Performance for 1000 qubits (lenght of list is 1000)<br>
 |library           |build, sec|commutes_with, sec|multiply, sec|
