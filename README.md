@@ -43,12 +43,12 @@ multiply: Pairwise multiplication<br>
 #### Computer: Intel Core i5-8265U 1.60 GHz/8Gb
 
 Performance for 1000 qubits (lenght of list is 1000)<br>
-|library        |build, sec|commutes_with, sec|multiply, sec|
-|:--------------|:-----:   |:-----:           |:-----:      |
-|stim           |0.0149    |0.3723            |0.8251       |
-|paulie         |0.4304    |0.3945            |0.5620       |
-|pauliarray     |0.2201    |9.2504            |5.8017       |
-|pauliarray     |4.2598    |4.9675            |8.8966       |
+|library           |build, sec|commutes_with, sec|multiply, sec|
+|:---------------- |:-----:   |:-----:           |:-----:      |
+|stim              |0.0149    |0.3723            |0.8251       |
+|paulie            |0.4304    |0.3945            |0.5620       |
+|pauliarray        |0.2201    |9.2504            |5.8017       |
+|julia paulistring |4.2598    |4.9675            |8.8966       |
 <br>
 
 library: stim | build:  0.0149 sec | commutes_with:  0.3723 sec | multiply:  0.8251 sec<br>
