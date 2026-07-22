@@ -250,11 +250,11 @@ def main():
          'performance': []
         },
     ]
-    paulistring_libs = append_paulistring_jl(paulistring_libs)
+    #paulistring_libs = append_paulistring_jl(paulistring_libs)
     #paulistring_libs = append_python_paulistring_jl(paulistring_libs)
 
     list_n_qubits = [10, 100, 1000, 2000, 5000, 10000]
-    list_n_qubits = [10, 100, 1000]
+    #list_n_qubits = [10, 100, 500, 1000, 2000, 5000]
     list_length = [1000]
 
     for length in list_length:
