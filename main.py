@@ -6,6 +6,8 @@ import cpuinfo
 from pathlib import Path
 from time import perf_counter
 from random import choice
+import matplotlib.pyplot as plt
+import numpy as np
 from src.paulie import *
 from src.stim import *
 from src.pauliarray import *
@@ -149,6 +151,7 @@ def get_processor_info():
     cpu_data = cpuinfo.get_cpu_info()
     return cpu_data['brand_raw']
 
+
 def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
     list_length: list[int]) -> None:
     """
@@ -160,8 +163,37 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
     """
 
     processor = get_processor_info()
+    folder = f"./results/{processor}"
+    Path(folder).mkdir(parents=True, exist_ok=True)
 
-    Path(f"./results/{processor}").mkdir(parents=True, exist_ok=True)
+    def plot_result(paulistring_libs: list[dict], list_n_qubits: list[int],
+        length: int, operation: str) -> None:
+        """
+        Print the performance result on the screen.
+        Args:
+            paulistring_libs (list[dict]): List for calling library functions
+            list_n_qubits (list[int]): List of qubit counts
+            length (int): Length of Pauli string numbers
+            operation (str): Operation
+        """
+        def find_performance(length, paulistring_libs, name, operation):
+            return np.array([performance[operation] for lib in paulistring_libs for performance in lib['performance']  
+                if performance['n_build'] == length and lib['name'] == name])
+
+        plt.figure(figsize=(10, 6))
+        qubits = np.array(list_n_qubits)
+        for lib in paulistring_libs:
+            results = find_performance(length, paulistring_libs, lib['name'], operation)
+            plt.plot(qubits, results, marker='x', linewidth=2, label=lib['name'])
+        plt.title(f"Dependence of {operation} execution time on the number of qubits", fontsize=14, fontweight='bold', pad=15)
+        plt.xlabel('Qubits', fontsize=12)
+        plt.ylabel('Time (sec)', fontsize=12)
+        plt.grid(True, linestyle="--", alpha=0.6) 
+        plt.legend(fontsize=11, loc='upper left')
+        filename = f"{folder}/{operation}_{length}.png"
+        plt.savefig(filename, dpi=300, bbox_inches='tight')
+        plt.close()
+        return f"![Dependence of {operation} execution time on the number of qubits]({operation}_{length}.png)"
 
     def find_libs(length, n_qubits, paulistring_libs):
         return [{'name' : lib['name'],
@@ -170,9 +202,18 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
                 } for lib in paulistring_libs for performance in lib['performance']  
                 if performance['n_build'] == length and performance['n_qubits'] == n_qubits]
 
-    with open(f"./results/{processor}/README.md", "w") as f:
+    with open(f"{folder}/README.md", "w") as f:
         print(f"## Processor: {processor}", file=f)
+        print("", file=f)
         for length in list_length:
+            build_plot = plot_result(paulistring_libs, list_n_qubits, length, 'build')
+            print(f"{build_plot}", file=f)
+            commutes_with_plot = plot_result(paulistring_libs, list_n_qubits, length, 'commutes_with')
+            print(f"{commutes_with_plot}", file=f)
+            multiply_plot = plot_result(paulistring_libs, list_n_qubits, length, 'multiply')
+            print(f"{multiply_plot}", file=f)
+            print("", file=f)
+
             for n_qubits in list_n_qubits:
                 libs = find_libs(length, n_qubits, paulistring_libs)
                 if len(libs) == 0:
