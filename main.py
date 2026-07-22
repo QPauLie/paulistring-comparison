@@ -183,6 +183,7 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
                 for lib in libs:
                     print(f"|{lib['name']}|{lib['performance']['build']: 0.4f}|{lib['performance']['commutes_with']: 0.4f}|{lib['performance']['multiply']: 0.4f}|", file=f)
                 print("<br>", file=f)
+                print("", file=f)
 
 def main():
     """
