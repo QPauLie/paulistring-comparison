@@ -18,12 +18,16 @@ def get_python_paulistring_jl_list(paulistrings:list[str])->list[str]:
     return paulistrings.copy()
 
 
-def check_python_paulistring_jl_commutes_with(paulistrings: list[str]) -> None:
+def check_python_paulistring_jl_commutes_with(paulistrings: list[str]) -> int:
     """
     Pairwise commutativity check
     Args:
          paulistrings (list[str]): list of Pauli strings in the Paulistrings representation
+    Returns:
+         int
+         number of opertations
     """
+    n = 0
     for s1, s2 in combinations(paulistrings, r=2):
         num_qubits = len(s1)
         op1 = ps.Operator(num_qubits)
@@ -34,14 +38,19 @@ def check_python_paulistring_jl_commutes_with(paulistrings: list[str]) -> None:
     
         comm = ps.commutator(op1, op2)
         is_commuting = len(comm) == 0
+        n += 1
+    return n
 
-
-def check_python_paulistring_jl_multiply(paulistrings: list[str]) -> None:
+def check_python_paulistring_jl_multiply(paulistrings: list[str]) -> int:
     """
     Pairwise multiplication check
     Args:
          paulistrings (list[str]): list of Pauli strings in the Paulistrings representation
+    Returns:
+         int
+         number of opertations
     """
+    n = 0
     for s1, s2 in combinations(paulistrings, r=2):
         num_qubits = len(s1)
         op1 = ps.Operator(num_qubits)
@@ -50,3 +59,5 @@ def check_python_paulistring_jl_multiply(paulistrings: list[str]) -> None:
         op2 = ps.Operator(num_qubits)
         op2 += s2
         r = op1 * op2
+        n += 1
+    return n

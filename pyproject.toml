@@ -9,6 +9,7 @@ dependencies = [
     "pauliarray",
     "paulie",
     "paulistrings>=0.1.1",
+    "py-cpuinfo>=9.0.0",
     "pycocotools==2.0.8",
     "stim>=1.16.0",
 ]

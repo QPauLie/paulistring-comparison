@@ -13,7 +13,7 @@ PauliStrings (Python version of PauliStrings.jl): https://github.com/nicolasloiz
 ```
 git clone https://github.com/QPauLie/paulistring-comparison.git
 cd paulistring-comparison
-uv sync
+uv sync --link-mode=copy
 ```
 ### Running
 ```
