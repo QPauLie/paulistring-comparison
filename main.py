@@ -163,7 +163,7 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
     """
 
     processor = get_processor_info()
-    folder = f"./results/{processor}"
+    folder = f"./results/optimal/{processor}"
     Path(folder).mkdir(parents=True, exist_ok=True)
 
     def plot_result(paulistring_libs: list[dict], list_n_qubits: list[int],
