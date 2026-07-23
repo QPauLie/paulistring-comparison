@@ -36,6 +36,10 @@ OverflowError: Python int too large to convert to C long<br>
 
 ### Results
 
+Results for various processors are located in the `results` folder.
+The `paulie` library performs best on multiplication operations. It slightly trails the `stim` library in the commutativity check and shows lackluster results when instantiating `PauliString` objects. This poor instantiation performance stems from the conversion of strings to a binary format within the `bitarray` library, as the process relies on a Python callback. To improve performance, a function needs to be added to `bitarray` that handles the conversion from string to bit representation internally; a commutativity check function should also be added to `bitarray`.
+
+
 build: Time to create an array of length 1000 with n_qubits = 1000<br>
 commutes_with: Pairwise commutativity check<br>
 multiply: Pairwise multiplication<br>
