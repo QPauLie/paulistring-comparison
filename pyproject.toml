@@ -9,13 +9,14 @@ dependencies = [
     "matplotlib>=3.11.0",
     "numpy>=2.5.1",
     "pauliarray",
+    "bitarray",
     "paulie",
-    "paulistrings>=0.1.1",
     "py-cpuinfo>=9.0.0",
     "pycocotools==2.0.8",
     "stim>=1.16.0",
 ]
 
 [tool.uv.sources]
-paulie = { git = "https://github.com/QPauLie/PauLie.git" }
 pauliarray = { git = "https://github.com/algolab-quantique/pauliarray.git" }
+paulie = { git = "https://github.com/QPauLie/PauLie.git", branch = "main"  }
+bitarray = { git = "https://github.com/QPauLie/bitarray.git", branch = "master" }

@@ -7,48 +7,48 @@
 ### Performance for 10 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.0020| 0.2429| 0.5748|
-|paulie| 0.0059| 0.2976| 0.4526|
-|pauliarray| 0.0181| 5.3444| 3.5851|
+|stim| 0.0015| 0.3480| 0.7925|
+|paulie| 0.0012| 0.3182| 0.4634|
+|pauliarray| 0.0187| 6.5504| 4.2826|
 <br>
 
 ### Performance for 100 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.0022| 0.2306| 0.5846|
-|paulie| 0.0265| 0.3008| 0.4544|
-|pauliarray| 0.0317| 5.8256| 3.6289|
+|stim| 0.0024| 0.3360| 0.7617|
+|paulie| 0.0032| 0.3386| 0.4865|
+|pauliarray| 0.0338| 6.5798| 4.3592|
 <br>
 
 ### Performance for 1000 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.0146| 0.2431| 0.6370|
-|paulie| 0.3145| 0.3940| 0.5150|
-|pauliarray| 0.1977| 7.3691| 4.3382|
+|stim| 0.0113| 0.3464| 0.7727|
+|paulie| 0.0134| 0.3927| 0.5532|
+|pauliarray| 0.2120| 8.5618| 4.9301|
 <br>
 
 ### Performance for 2000 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.0254| 0.2568| 0.6260|
-|paulie| 0.6124| 0.4247| 0.5027|
-|pauliarray| 0.3945| 8.2603| 4.6376|
+|stim| 0.0222| 0.3564| 0.8253|
+|paulie| 0.0264| 0.4144| 0.5946|
+|pauliarray| 0.4065| 10.1488| 5.2440|
 <br>
 
 ### Performance for 5000 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.0593| 0.2755| 0.6579|
-|paulie| 1.5353| 0.6152| 0.5923|
-|pauliarray| 1.0913| 11.8827| 5.5089|
+|stim| 0.0524| 0.3826| 0.8862|
+|paulie| 0.0633| 0.4777| 0.6753|
+|pauliarray| 1.0138| 13.7393| 5.6188|
 <br>
 
 ### Performance for 10000 qubits (lenght of list is 1000 and number of operations is 499500)<br>
 |library                  |build, sec|commutes_with, sec|multiply, sec|
 |:----------------------- |:-----:   |:-----:           |:-----:      |
-|stim| 0.1320| 0.3035| 0.9350|
-|paulie| 3.3324| 0.9670| 0.7546|
-|pauliarray| 2.0374| 16.1894| 6.3411|
+|stim| 0.1051| 0.4391| 0.9835|
+|paulie| 0.1263| 0.5565| 0.7587|
+|pauliarray| 2.0236| 19.9972| 6.9133|
 <br>
 
