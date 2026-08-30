@@ -19,4 +19,4 @@ dependencies = [
 [tool.uv.sources]
 pauliarray = { git = "https://github.com/algolab-quantique/pauliarray.git" }
 paulie = { git = "https://github.com/QPauLie/PauLie.git", branch = "main"  }
-bitarray = { git = "https://github.com/QPauLie/bitarray.git", branch = "master" }
+pauliebits = { git = "https://github.com/QPauLie/pauliebits.git", branch = "master" }

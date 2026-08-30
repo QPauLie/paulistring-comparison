@@ -11,6 +11,8 @@ import numpy as np
 from src.paulie import *
 from src.stim import *
 from src.pauliarray import *
+from datetime import datetime
+
 
 def is_julia_installed()->bool:
     """ 
@@ -115,7 +117,7 @@ def append_python_paulistring_jl(paulistring_libs: list[dict])->list[dict]:
     })
     return paulistring_libs
 
-def get_performance(n_qubits: int,lib: dict, paulistrings: list[str])->dict:
+def get_performance(n_qubits: int, lib: dict, paulistrings: list[str])->dict:
     """
     Performance calculation
     Args:
@@ -126,7 +128,7 @@ def get_performance(n_qubits: int,lib: dict, paulistrings: list[str])->dict:
           dict
           Call performance
     """
-    performance = {'n_qubits': n_qubits}
+    performance = {}
     start_time = perf_counter()
     g = lib['build'](paulistrings)
     end_time = perf_counter()
@@ -151,22 +153,60 @@ def get_processor_info():
     cpu_data = cpuinfo.get_cpu_info()
     return cpu_data['brand_raw']
 
-
-def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
-    list_length: list[int]) -> None:
+def get_folder(processor: str):
     """
-    Print the performance result on the screen.
+    Get folder for results
+    """
+    now = datetime.now()
+
+    folder_time = now.strftime("%Y-%m-%d_%H-%M-%S")
+
+    folder = f"./results/statistic/{processor}/{folder_time}"
+    Path(folder).mkdir(parents=True, exist_ok=True)
+    return folder
+
+def output_result(paulistring_libs: list[dict], list_n_qubits: list[int],
+    performances: list[dict], n_attemptions:int, length: int) -> None:
+    """
+    Output the performance result on readme.md.
     Args:
          paulistring_libs (list[dict]): List for calling library functions
          list_n_qubits (list[int]): List of qubit counts
-         list_length (list[int]): List of Pauli string numbers
+         performances (list[dict]): List of results
     """
-
     processor = get_processor_info()
-    folder = f"./results/optimal/{processor}"
-    Path(folder).mkdir(parents=True, exist_ok=True)
+    folder = get_folder(processor)
 
-    def plot_result(paulistring_libs: list[dict], list_n_qubits: list[int],
+    def get_seria(operation: str, performances: list[dict], library: str, n_qubits: int) -> list[float]:
+        """
+        """
+        return [p["performance"].get(operation) 
+            for p in performances if p["library"] == library and p["n_qubits"] == n_qubits
+        ]
+
+    def get_statistic(list_data: list[float]) -> dict:
+        average = sum(list_data)/len(list_data)
+        variance = sum((x - average) ** 2 for x in list_data) / len(list_data)
+        std_dev = variance ** 0.5
+        return {
+            "average": average,
+            "std_dev": std_dev
+        }
+
+
+    def get_performance_by_filter(operation: str, performances: list[dict], libraries: str, n_qubits: int):
+        return {library: get_seria(operation, performances, library, n_qubits) for library in libraries}
+            
+
+
+#         return [{
+#           item["library"]: item["performance"][operation]
+#           for item in data
+#             if item["n_qubits"] == n_qubits and operation in item["performance"]
+#    }]
+
+
+    def plot_result(paulistring_libs: list[dict], performances: list[dict], list_n_qubits: list[int],
         length: int, operation: str) -> None:
         """
         Print the performance result on the screen.
@@ -176,15 +216,23 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
             length (int): Length of Pauli string numbers
             operation (str): Operation
         """
-        def find_performance(length, paulistring_libs, name, operation):
-            return np.array([performance[operation] for lib in paulistring_libs for performance in lib['performance']  
-                if performance['n_build'] == length and lib['name'] == name])
+
 
         plt.figure(figsize=(10, 6))
         qubits = np.array(list_n_qubits)
         for lib in paulistring_libs:
-            results = find_performance(length, paulistring_libs, lib['name'], operation)
-            plt.plot(qubits, results, marker='x', linewidth=2, label=lib['name'])
+            results = [get_statistic(get_seria(operation, performances, lib["name"], n_qubits)) 
+                 for n_qubits in list_n_qubits 
+            ] 
+            y = np.array([r.get("average") for r in results])
+            y_err = np.array([r.get("std_dev") for r in results])
+
+            plt.errorbar(qubits, y, yerr=y_err, fmt='-o', capsize=4, linewidth=2, label=lib['name']) #marker='x',
+
+            #results = find_performance(length, paulistring_libs, lib['name'], operation)
+            #plt.plot(qubits, results, marker='x', linewidth=2, label=lib['name'])
+
+        plt.yscale('log')
         plt.title(f"Dependence of {operation} execution time on the number of qubits", fontsize=14, fontweight='bold', pad=15)
         plt.xlabel('Qubits', fontsize=12)
         plt.ylabel('Time (sec)', fontsize=12)
@@ -205,68 +253,100 @@ def print_result(paulistring_libs: list[dict], list_n_qubits: list[int],
     with open(f"{folder}/README.md", "w") as f:
         print(f"## Processor: {processor}", file=f)
         print("", file=f)
-        for length in list_length:
-            build_plot = plot_result(paulistring_libs, list_n_qubits, length, 'build')
-            print(f"{build_plot}", file=f)
-            commutes_with_plot = plot_result(paulistring_libs, list_n_qubits, length, 'commutes_with')
-            print(f"{commutes_with_plot}", file=f)
-            multiply_plot = plot_result(paulistring_libs, list_n_qubits, length, 'multiply')
-            print(f"{multiply_plot}", file=f)
-            print("", file=f)
+        build_plot = plot_result(paulistring_libs, performances, list_n_qubits, length, 'build')
+        print(f"{build_plot}", file=f)
+        commutes_with_plot = plot_result(paulistring_libs, performances, list_n_qubits, length, 'commutes_with')
+        print(f"{commutes_with_plot}", file=f)
+        multiply_plot = plot_result(paulistring_libs, performances, list_n_qubits, length, 'multiply')
+        print(f"{multiply_plot}", file=f)
+        print("", file=f)
 
-            for n_qubits in list_n_qubits:
-                libs = find_libs(length, n_qubits, paulistring_libs)
-                if len(libs) == 0:
-                    continue
-                print(f"### Performance for {n_qubits} qubits (lenght of list is {length} and number of operations is {libs[0]['operations']})<br>", file=f)
-                print('|library                  |build, sec|commutes_with, sec|multiply, sec|', file=f)
-                print('|:----------------------- |:-----:   |:-----:           |:-----:      |', file=f)
-                for lib in libs:
-                    print(f"|{lib['name']}|{lib['performance']['build']: 0.4f}|{lib['performance']['commutes_with']: 0.4f}|{lib['performance']['multiply']: 0.4f}|", file=f)
-                print("<br>", file=f)
-                print("", file=f)
+        libraries = [lib.get("name") for lib in paulistring_libs]
+
+        headers = "| # | " + " | ".join(libraries) + " |"
+        separators = "| :---: | " + " | ".join([":------:"] * len(libraries)) + " |"
+
+        
+        list_operations = ["build", "commutes_with", "multiply"]
+        for n_qubits in list_n_qubits:
+            for operation in list_operations:
+                table_rows = [headers, separators]    
+                results = get_performance_by_filter(operation, performances, libraries, n_qubits)
+                #results = get_performance_by_filter(performances, operation, n_qubits)
+                #seria = get_seria(operation, performances, "stim", n_qubits)
+                #print(f"seria = {seria}")
+                first_library = libraries[0]
+
+                for idx,_ in enumerate(results.get(first_library)):
+                    row_cells = [str(idx + 1)]
+
+                    for lib in libraries:
+                        value = results.get(lib)[idx]
+                        if value is not None:
+                            row_cells.append(f"{value:.6f}")
+                        else:
+                            row_cells.append("-")
+                    table_rows.append("| " + " | ".join(row_cells) + " |")
+
+                row_cells_avarage = ["avg"]
+                row_cells_std_dev = ["dev"]
+                for lib in libraries:
+                      list_data = get_seria(operation, performances, lib, n_qubits)
+                      stat = get_statistic(list_data) 
+                      row_cells_avarage.append(f"{stat.get('average'):.6f}")
+                      row_cells_std_dev.append(f"{stat.get('std_dev'):.6f}")
+                table_rows.append("| " + " | ".join(row_cells_avarage) + " |")
+                table_rows.append("| " + " | ".join(row_cells_std_dev) + " |")
+                markdown_table = "\n".join(table_rows)
+                print(f"### Performance for {operation} ({n_qubits} qubits and lenght of list is {length}'))<br>", file=f)
+                print(markdown_table, file=f)
 
 def main():
     """
     Comparison of Pauli string manipulation libraries
     """
+    print(f"start")
     paulistring_libs = [
         {'name': 'stim',
          'build': get_stim_list,
          'commutes_with': check_stim_commutes_with,
          'multiply': check_stim_multiply,
-         'performance': []
         },
         {'name': 'paulie',
          'build': get_paulie_list,
          'commutes_with': check_paulie_commutes_with,
          'multiply': check_paulie_multiply,
-         'performance': []
         },
         {'name': 'pauliarray',
          'build': get_pauliarray_list,
          'commutes_with': check_pauliarray_commutes_with,
          'multiply': check_pauliarray_multiply,
-         'performance': []
         },
     ]
     #paulistring_libs = append_paulistring_jl(paulistring_libs)
     #paulistring_libs = append_python_paulistring_jl(paulistring_libs)
 
-    list_n_qubits = [10, 100, 1000, 2000, 5000, 10000]
+    list_n_qubits = [10, 100, 1000, 3000, 6000, 8000, 10000, 12000]
     #list_n_qubits = [10, 100, 500, 1000, 2000, 5000]
-    list_length = [1000]
-
-    for length in list_length:
+    length = 1000
+    n_attemptions = 5
+    performances = []
+    for attemption in range(0, n_attemptions):
         for n_qubits in list_n_qubits:
             paulistrings = get_random_list(n_qubits, length)
             for lib in paulistring_libs:
                 try:
-                    lib['performance'].append(get_performance(n_qubits, lib, paulistrings))
+                    performances.append(
+                         {
+                           "library": lib.get("name"),
+                           "n_qubits": n_qubits,
+                           "performance": get_performance(n_qubits, lib, paulistrings),
+                         }
+                    )
                 except RuntimeError:
                     continue
     #print(f"{paulistring_libs}")
-    print_result(paulistring_libs, list_n_qubits, list_length)
+    output_result(paulistring_libs, list_n_qubits, performances, n_attemptions, length)
 
 
 if __name__ == "__main__":
