@@ -250,6 +250,7 @@ def output_result(paulistring_libs: list[dict], list_n_qubits: list[int],
                 } for lib in paulistring_libs for performance in lib['performance']  
                 if performance['n_build'] == length and performance['n_qubits'] == n_qubits]
 
+    libraries = [lib.get("name") for lib in paulistring_libs]
     with open(f"{folder}/README.md", "w") as f:
         print(f"## Processor: {processor}", file=f)
         print("", file=f)
@@ -261,7 +262,6 @@ def output_result(paulistring_libs: list[dict], list_n_qubits: list[int],
         print(f"{multiply_plot}", file=f)
         print("", file=f)
 
-        libraries = [lib.get("name") for lib in paulistring_libs]
 
         headers = "| # | " + " | ".join(libraries) + " |"
         separators = "| :---: | " + " | ".join([":------:"] * len(libraries)) + " |"
@@ -300,7 +300,14 @@ def output_result(paulistring_libs: list[dict], list_n_qubits: list[int],
                 markdown_table = "\n".join(table_rows)
                 print(f"### Performance for {operation} ({n_qubits} qubits and lenght of list is {length}'))<br>", file=f)
                 print(markdown_table, file=f)
-
+    with open(f"{folder}/result.csv", "w") as f:
+        print(f"#;qubits;operation;library;performance", file=f)
+        for operation in list_operations:
+            for library in libraries:
+                for n_qubits in list_n_qubits:
+                    seria = get_seria(operation, performances, library, n_qubits)
+                    for idx, item in enumerate(seria):
+                        print(f"{idx + 1};{n_qubits};{operation};{library};{item}", file=f)
 def main():
     """
     Comparison of Pauli string manipulation libraries
@@ -328,7 +335,7 @@ def main():
 
     list_n_qubits = [10, 100, 1000, 3000, 6000, 8000, 10000, 12000]
     #list_n_qubits = [10, 100, 500, 1000, 2000, 5000]
-    length = 1000
+    length = 10
     n_attemptions = 5
     performances = []
     for attemption in range(0, n_attemptions):
