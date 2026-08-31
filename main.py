@@ -336,7 +336,7 @@ def main():
     list_n_qubits = [10, 100, 1000, 3000, 6000, 8000, 10000, 12000]
     #list_n_qubits = [10, 100, 500, 1000, 2000, 5000]
     length = 1000
-    n_attemptions = 100
+    n_attemptions = 30
     performances = []
     for attemption in range(0, n_attemptions):
         for n_qubits in list_n_qubits:
