@@ -11,6 +11,7 @@ import numpy as np
 from src.paulie import *
 from src.stim import *
 from src.pauliarray import *
+from src.pauliengine import *
 from datetime import datetime
 
 
@@ -329,6 +330,11 @@ def main():
          'commutes_with': check_pauliarray_commutes_with,
          'multiply': check_pauliarray_multiply,
         },
+        {'name': 'pauliengine',
+         'build': get_pauliengine_list,
+         'commutes_with': check_pauliengine_commutes_with,
+         'multiply': check_pauliengine_multiply,
+        },
     ]
     #paulistring_libs = append_paulistring_jl(paulistring_libs)
     #paulistring_libs = append_python_paulistring_jl(paulistring_libs)
@@ -336,7 +342,7 @@ def main():
     list_n_qubits = [10, 100, 1000, 3000, 6000, 8000, 10000, 12000]
     #list_n_qubits = [10, 100, 500, 1000, 2000, 5000]
     length = 1000
-    n_attemptions = 30
+    n_attemptions = 100
     performances = []
     for attemption in range(0, n_attemptions):
         for n_qubits in list_n_qubits:
