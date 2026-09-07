@@ -7,8 +7,8 @@ Stim: https://github.com/quantumlib/Stim<br>
 Paulie: https://github.com/QPauLie/PauLie<br>
 PauliArray: https://github.com/algolab-quantique/pauliarray<br>
 PauliString.jl (juliacall): https://github.com/nicolasloizeau/PauliStrings.jl<br>
-PauliStrings (Python version of PauliStrings.jl): https://github.com/nicolasloizeau/PauliStrings.py
-Pauliengine: https://github.com/tequilahub/pauliengine
+PauliStrings (Python version of PauliStrings.jl): https://github.com/nicolasloizeau/PauliStrings.py<br>
+Pauliengine: https://github.com/tequilahub/pauliengine<br>
 
 ### Installation
 ```
