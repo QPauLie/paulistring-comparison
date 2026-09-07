@@ -1,6 +1,9 @@
 # paulistring-comparison
 Performance comparison of Pauli string manipulation libraries
 <br>
+This comparison was made for an article prepared for the 2026 IEEE International Conference on Quantum Computing and Engineering (QCE).<br>
+https://arxiv.org/abs/2608.30771
+<br>
 The following libraries are included in the comparison:
 <br>
 Stim: https://github.com/quantumlib/Stim<br>
