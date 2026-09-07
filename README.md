@@ -41,5 +41,19 @@ PauliString.jl (juliacall)
 PauliStrings (Python version of PauliStrings.jl)
 Comparison results have been excluded, as they are an order of magnitude slower than the other packages when using Python.
 
+The tests were run on two processors. The results are available at the link.
+####Intel(R) Core(TM) i5-8265U
+![Dependence of build execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26/build_1000.png)
+![Dependence of commutes_with execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26/commutes_with_1000.png)
+![Dependence of multiply execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26/multiply_1000.png)
+
+
+https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26
+####Intel(R) Core(TM) i9-14900KF
+![Dependence of build execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i9-14900KF/2026-09-06_21-07-52/build_1000.png)
+![Dependence of commutes_with execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i9-14900KF/2026-09-06_21-07-52/commutes_with_1000.png)
+![Dependence of multiply execution time on the number of qubits](https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i9-14900KF/2026-09-06_21-07-52/multiply_1000.png)
+
+https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i9-14900KF/2026-09-06_21-07-52
 
 
