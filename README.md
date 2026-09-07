@@ -37,8 +37,7 @@ OverflowError: Python int too large to convert to C long<br>
 
 ### Results
 
-PauliString.jl (juliacall)
-PauliStrings (Python version of PauliStrings.jl)
+PauliString.jl (juliacall) and PauliStrings (Python version of PauliStrings.jl)
 Comparison results have been excluded, as they are an order of magnitude slower than the other packages when using Python.
 
 The tests were run on two processors. The results are available at the link.
