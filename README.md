@@ -43,6 +43,7 @@ Comparison results have been excluded, as they are an order of magnitude slower 
 
 The tests were run on two processors. The results are available at the link.
 <br>
+
 #### Intel(R) Core(TM) i5-8265U
 <p align="center">
   <img src="results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26/build_1000.png" alt="Dependence of build execution time on the number of qubits" width="32%">
@@ -52,6 +53,7 @@ The tests were run on two processors. The results are available at the link.
 <br>
 https://github.com/QPauLie/paulistring-comparison/tree/main/results/statistic/Intel(R)%20Core(TM)%20i5-8265U%20CPU%20%40%201.60GHz/2026-09-06_18-39-26
 <br>
+
 #### Intel(R) Core(TM) i9-14900KF
 <p align="center">
   <img src="results/statistic/Intel(R)%20Core(TM)%20i9-14900KF/2026-09-06_21-07-52/build_1000.png" alt="Dependence of build execution time on the number of qubits" width="32%">
